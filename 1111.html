@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>+- цИФРА ПОДРЯД</title>
+  <script>
+    function analyzeSequence(numbers) {
+      let negativeCount = 0;
+      let maxConsecutiveNegatives = 0;
+      let currentConsecutive = 0;
+
+      for (let i = 0; i < numbers.length; i++) {
+        if (numbers[i] < 0) {
+          negativeCount++;
+          currentConsecutive++;
+          if (currentConsecutive > maxConsecutiveNegatives) {
+            maxConsecutiveNegatives = currentConsecutive;
+          }
+        } else {
+          currentConsecutive = 0;
+        }
+      }
+
+      return {
+        negativeCount: negativeCount,
+        maxConsecutiveNegatives: maxConsecutiveNegatives
+      };
+    }
+  </script>
+</head>
+<body>
+<h1>СТРОКИ ЦИФР</h1>
+
+<div>
+  <h2>Последовательность 1:</h2>
+  <p id="sequence1"></p>
+  <p id="result1"></p>
+</div>
+
+<div>
+  <h2>Последовательность 2:</h2>
+  <p id="sequence2"></p>
+  <p id="result2"></p>
+</div>
+
+<script>
+  const sequence1 = [8, -4, 4, -10, 0, -4, -1, -10, 8, -5, 3, 2, 5, 3, 0];
+  const sequence2 = [6, 4, 10, -2, 10, 2, -10, -9, 3, 7, 7, 6, 7, 2, 6];
+
+  document.getElementById('sequence1').textContent = sequence1.join(', ');
+  document.getElementById('sequence2').textContent = sequence2.join(', ');
+
+  const result1 = analyzeSequence(sequence1);
+  const result2 = analyzeSequence(sequence2);
+
+  document.getElementById('result1').innerHTML =
+    `Количество отрицательных чисел: ${result1.negativeCount}<br>
+             Максимальное число подряд идущих отрицательных чисел: ${result1.maxConsecutiveNegatives}`;
+
+  document.getElementById('result2').innerHTML =
+    `Количество отрицательных чисел: ${result2.negativeCount}<br>
+             Максимальное число подряд идущих отрицательных чисел: ${result2.maxConsecutiveNegatives}`;
+</script>
+</body>
+</html>
